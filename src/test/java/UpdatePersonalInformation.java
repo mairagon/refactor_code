@@ -3,6 +3,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 import utils.WebDriverSupliter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,7 +29,15 @@ public class UpdatePersonalInformation {
         driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
 
        /*Se inicia sesión en la aplicación*/
-        driver.findElement(By.id("email")).sendKeys("fernandocotrena@gmail.com");
+        LoginPage loginpage =
+                PageFactory.initElements(driver,
+                        LoginPage.class);
+        loginpage.setEmail("fernandocotrena@gmail.com");
+
+        Login.authentication(email "fernandocotrena@gmail.com", password "admin123456");
+
+
+        //driver.findElement(By.id("email")).sendKeys("fernandocotrena@gmail.com");
         driver.findElement(By.id("passwd")).sendKeys("admin123456");
         driver.findElement(By.cssSelector("#SubmitLogin > span")).click();
 
@@ -33,6 +45,9 @@ public class UpdatePersonalInformation {
         driver.findElement(By.cssSelector("li:nth-child(4) span:nth-child(2)")).click();
 
         /*Se actualizan los datos personales del usuario*/
+
+
+
         driver.findElement(By.id("firstname")).sendKeys("Pedro");
         driver.findElement(By.id("lastname")).sendKeys("Gonzalez");
         driver.findElement(By.id("old_passwd")).sendKeys("admin123456");
